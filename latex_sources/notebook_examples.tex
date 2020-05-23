@@ -1,0 +1,62 @@
+\section{Exemples \LaTeX pour l'utilisation du cahier}
+
+Cette section présente des exemples pour l'utilisation de la classe notebook. 
+
+\subsection{Écrire du code}
+
+\subsubsection{Terminal}
+
+Pour écrire une sortie de terminal, il y a l'environnement terminal. Par exemple, écrire:
+
+\begin{TeXlstlisting}
+\begin{terminal}
+sudo apt install monpackage
+\end{terminal}
+\end{TeXlstlisting}
+
+permet d'avoir le rendu:
+
+\begin{terminal}
+sudo apt install monpackage
+\end{terminal}
+
+\subsubsection{Code C++}
+
+Pour écrire du code C++ il est possible d'utiliser l'environnement \textbf{lstlisting} avec l'option \textbf{C++}. Par exemple, écrire:
+
+\begin{TeXlstlisting}
+\begin{lstlisting}[language=C++]
+// un commentaire
+int main(void){
+    printf("test");
+}
+\end{lstlisting}
+\end{TeXlstlisting}
+
+permet d'avoir le rendu :
+
+\begin{lstlisting}[language=C++]
+// un commentaire
+int main(void){
+    printf("test");
+}
+\end{lstlisting}
+
+\subsubsection{Code Python}
+
+Pour écrire du code Python il est possible d'utiliser l'environnement \textbf{lstlisting} avec l'option \textbf{Python}. Par exemple, écrire:
+\begin{TeXlstlisting}
+\begin{lstlisting}[language=Python]
+# un commentaire
+for i in range(0, 10):
+    print(i)
+\end{lstlisting}
+\end{TeXlstlisting}
+
+permet d'obtenir:
+
+\begin{lstlisting}[language=Python]
+# un commentaire
+for i in range(0, 10):
+    print(i)
+\end{lstlisting}

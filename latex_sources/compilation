@@ -1,0 +1,10 @@
+rm *.bbl *.log *.aux *.blg *.dvi *.maf *.mtc* *.out *.toc *.idx *.ilg *.ind *.nlo *.nls *.nav *.snm *.spl
+
+pdflatex main.tex
+bibtex main
+pdflatex main.tex
+pdflatex main.tex
+
+rm *.bbl *.log *.aux *.blg *.dvi *.maf *.mtc* *.out *.toc *.idx *.ilg *.ind *.nlo *.nls *.nav *.snm *.spl
+
+evince main.pdf

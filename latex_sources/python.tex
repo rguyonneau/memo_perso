@@ -1,0 +1,144 @@
+\section{Notes sur le langage Python}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Commandes utiles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Commande utiles}
+
+% ---------------------------------------------------------------------
+\subsubsection{le terminal python}
+
+Lancer l'interpreteur:
+
+\begin{terminal}
+python3
+Python 3.6.9 (default, Apr 18 2020, 01:56:04) 
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+\end{terminal}
+
+Quitter l'interpréteur
+
+\begin{terminal}
+>>> exit()
+\end{terminal}
+
+% ---------------------------------------------------------------------
+\subsubsection{La commande dir()}
+
+La fonction dir() retourne toutes les propriétés et méthodes d'un objet donné en paramètre. Sans paramètre en entrée elle permet notamment d'accéder à tous les packages disponibles.
+
+\begin{lstlisting}[language=Python]
+dir()  # Lister tous les imports disponibles a ce moment du code
+\end{lstlisting}
+
+Exemple d'utilisation:
+
+\begin{terminal}
+>>> dir()
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']', '__package__', '__spec__']
+>>> import tkinter
+>>> dir()
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'tkinter']
+\end{terminal}
+
+
+\begin{lstlisting}[language=Python]
+dir(name)  # Lister les proprietes/methodes disponibles pour "name"
+\end{lstlisting}
+
+Exemple d'utilisation:
+
+\begin{terminal}
+>>> dir(tkinter)
+['ACTIVE', 'ALL', ...,  'Text', 'Tk', 'TkVersion', ...]
+>>> dir(tkinter.Tk)
+['_Misc__winfo_getint', '_Misc__winfo_parseitem', '__class__', ..., 'after', 'after_cancel', 'after_idle', 'anchor', 'aspect', 'attributes', 'bbox', ...]
+\end{terminal}
+
+% ---------------------------------------------------------------------
+\subsubsection{La commande help()}
+
+Elle permet d'accéder à l'aide python. Elle prend un argument, qui correspond à l'objet pour lequel on veut obtenir des informations.
+\begin{lstlisting}[language=Python]
+help(name)  # Obtenir de l aide sur le module "name"
+\end{lstlisting}
+
+Exemple d'utilisation:
+
+\begin{terminal}
+>>> help(tkinter.Tk)
+>>> help(list)
+\end{terminal}
+
+Pour quitter l'aide on peut utiliser la touche 'q' du clavier.
+
+% ---------------------------------------------------------------------
+\subsubsection{todo?}
+
+pip list
+
+which python
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Environnements virtuels
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Environnements virtuels}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Listes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Listes}
+
+\subsubsection{Accéder à des éléments}
+
+Pour accéder aux derniers éléments d'une liste:
+
+\begin{lstlisting}[language=Python]
+ma_liste = [1,2,3,4]
+print(ma_liste[-1])  # affiche 4
+print(ma_liste[-2])  # affiche 3
+\end{lstlisting}
+
+Attention, cette notation aussi peut générer une exception "IndexError".
+
+\subsubsection{Parcourir des listes}
+
+Pour parcourir une liste sans utiliser d'indice
+\begin{lstlisting}[language=Python]
+ma_liste = [1, 2,"test"]
+for val in ma_liste:
+    print(val)
+\end{lstlisting}
+Affiche:
+\begin{terminal}
+1
+2
+test
+\end{terminal}
+
+Pour parcourir une liste tout en récupérant l'indice
+\begin{lstlisting}[language=Python]
+ma_liste = [1, 2, 3, 4, "toto", pi]
+for idx, val in enumerate(ma_liste):
+    print(f"ma_liste[{idx}] = {val}")
+\end{lstlisting}
+Affiche:
+\begin{terminal}
+ma_liste[0] = 1
+ma_liste[1] = 2
+ma_liste[2] = test
+\end{terminal}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Lambda fonction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fonctions Lambda / Fonctions sans noms}
+
+
+
+
