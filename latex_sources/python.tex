@@ -75,6 +75,56 @@ Exemple d'utilisation:
 Pour quitter l'aide on peut utiliser la touche 'q' du clavier.
 
 % ---------------------------------------------------------------------
+\subsubsection{Gestion de grands nombres}
+
+Il est possible d'utiliser l'underscore pour améliorer la visibilité de grands nombres:
+\begin{lstlisting}[language=Python]
+un_grand_nombre = 10_000_000_000
+un_plus_petit_grand_nombre = 2_000_000_000
+somme = un_grand_nombre + un_plus_petit_grand_nombre
+print(f"{somme:_}")
+\end{lstlisting}
+Ce qui donne l'affichage suivant
+\begin{terminal}
+12_000_000_000
+\end{terminal}
+
+\subsubsection{La commande type()}
+
+Il est possible d'utiliser la commande type() pour connaître le type d'une variable. Par exemple
+
+\begin{lstlisting}[language=Python]
+variables = [1, 3.2, lambda x: x + 1, (1, 2), [1, 2]]
+for var in variables:
+    print(type(var))
+\end{lstlisting}
+Donne l'affichage suivant
+\begin{terminal}
+<class 'int'>
+<class 'float'>
+<class 'function'>
+<class 'tuple'>
+<class 'list'>
+\end{terminal}
+
+
+\subsubsection{Les variables non utilisées}
+
+La convention en python pour la gestion des variables non utilisées est de les appeler "\_". Des exemple:
+
+\begin{lstlisting}[language=Python]
+mon_tuple = (1, 2, 3)
+val1, _, val2 = mon_tuple
+print(f"val1:{val1}, val2:{val2}")
+\end{lstlisting}
+Affiche
+\begin{terminal}
+val1:1, val2:3
+\end{terminal}
+La deuxième valeur du tuple n'est pas utilisée.
+
+
+% ---------------------------------------------------------------------
 \subsubsection{todo?}
 
 pip list
@@ -86,11 +136,31 @@ which python
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Environnements virtuels}
 
+% ---------------------------------------------------------------------
+\subsubsection{Pourquoi?}
+Un espace pour installer des paquets spécifiques à un ou plusieurs projets
+
+% ---------------------------------------------------------------------
+\subsubsection{Créer un environnement avec venv (standard)}
+
+\begin{terminal}
+python3 -m venv test_env
+\end{terminal}
+Remarque: le "-m" c'est pour dire qu'on lance le module venv. Le module venv attend un argument: le nom de l'environnement (test\_env) ici.
+
+% ---------------------------------------------------------------------
+\subsubsection{Activer l'environnement}
+
+\begin{terminal}
+source test_env/bin/activate
+\end{terminal}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                     Listes
+%                       Listes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Listes}
 
+% ---------------------------------------------------------------------
 \subsubsection{Accéder à des éléments}
 
 Pour accéder aux derniers éléments d'une liste:
@@ -103,6 +173,7 @@ print(ma_liste[-2])  # affiche 3
 
 Attention, cette notation aussi peut générer une exception "IndexError".
 
+% ---------------------------------------------------------------------
 \subsubsection{Parcourir des listes}
 
 Pour parcourir une liste sans utiliser d'indice
@@ -118,9 +189,9 @@ Affiche:
 test
 \end{terminal}
 
-Pour parcourir une liste tout en récupérant l'indice
+Pour parcourir une liste tout en comptant les éléments:
 \begin{lstlisting}[language=Python]
-ma_liste = [1, 2, 3, 4, "toto", pi]
+ma_liste = [1, 2, "test"]
 for idx, val in enumerate(ma_liste):
     print(f"ma_liste[{idx}] = {val}")
 \end{lstlisting}
@@ -131,8 +202,242 @@ ma_liste[1] = 2
 ma_liste[2] = test
 \end{terminal}
 
+Il est aussi possible de commencer à compter à partir d'une certaine valeure:
+\begin{lstlisting}[language=Python]
+ma_liste = [1, 2, "test"]
+for idx, val in enumerate(ma_liste, start=1):
+    print(f"{idx} : {val}")
+\end{lstlisting}
+Affiche:
+\begin{terminal}
+1 : 1
+2 : 2
+3 : test
+\end{terminal}
+
+% ---------------------------------------------------------------------
+\subsubsection{Parcourir deux listes en même temps}
+
+Il est possible d'utiliser la fonction zip() pour parcourir plusieurs listes. Un exemple avec deux listes, mais peut être étendu à plus de listes:
+
+\begin{lstlisting}[language=Python]
+list1 = [1, 2, 3]
+list2 = ["un", "deux", "trois"]
+
+for val1, val2 in zip(list1, list2):
+    print(f"{val1} : {val2}")
+\end{lstlisting}
+
+\begin{terminal}
+1 : un
+2 : deux
+3 : trois
+\end{terminal}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Tuple
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tuples}
+
+\subsubsection{Récupérer les valeurs}
+
+Récupérer toutes les valeurs:
+\begin{lstlisting}[language=Python]
+mon_tupple = (1, 2, 3)
+a, b, c = mon_tupple
+print(f"a:{a}, b:{b}, c:{c}")
+\end{lstlisting}
+
+\begin{terminal}
+a:1, b:2, c:3
+\end{terminal}
+
+Récupérer une partie des valeurs d'un tuple. Ce qu'il ne faut pas faire:
+\begin{lstlisting}[language=Python]
+mon_tupple = (1, 2, 3, 4, 5)
+a, b, c = mon_tupple
+print(f"a:{a}, b:{b}, c:{c}")
+\end{lstlisting}
+\begin{terminal}
+    a, b, c = mon_tupple
+ValueError: too many values to unpack (expected 3)
+\end{terminal}
+Ce qu'il est possible de faire:
+\begin{lstlisting}[language=Python]
+mon_tupple = (1, 2, 3, 4, 5)
+a, b, *c = mon_tupple
+print(f"a:{a}, b:{b}, c:{c}")
+\end{lstlisting}
+
+\begin{terminal}
+a:1, b:2, c:[3, 4, 5]
+\end{terminal}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Saisies
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Saisies}
+
+% ---------------------------------------------------------------------
+\subsubsection{Récupérer une saisie sans l'afficher à l'écran (terminal)}
+
+Cas d'utilisation:
+\begin{lstlisting}[language=Python]
+nom = input("Utilisateur: ")
+psw = input("Mot de passe: ")
+print("Connexion...")
+\end{lstlisting}
+\begin{terminal}
+Utilisateur: remy
+Mot de passe: mdp
+Connexion...
+\end{terminal}
+On voit que le mot de passe s'affiche sur le terminal, ce qui n'est pas désirable... 
+
+À la place, il est possible de faire:
+\begin{lstlisting}[language=Python]
+from getpass import getpass
+nom = input("Utilisateur: ")
+psw = getpass("Mot de passe: ")
+print("Connexion...")
+\end{lstlisting}
+\begin{terminal}
+Utilisateur: remy
+Mot de passe:
+Connexion...
+\end{terminal}
+Ce qui est quand même mieux...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Classes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Classes}
+
+% ---------------------------------------------------------------------
+\subsubsection{Définir un attribut dynamiquement}
+
+Cas simple sans attribution dynamique du nom des attributs:
+\begin{lstlisting}[language=Python]
+# declaration d une classe "vide"
+class Ma_classe():
+    pass
+# instanciation de la classe dans l objet inst
+inst = Ma_classe()
+# on ajoute un attribut "att1" a la classe et lui affecte la valeur "coucou"
+inst.att1 = "coucou"
+# on ajoute un attribut "att2" a la classe et lui affecte la valeur "coucou"
+inst.att2 = 3
+# affichage des valeurs des attributs
+print(inst.att1, inst.att2)
+\end{lstlisting}
+\begin{terminal}
+coucou 3
+\end{terminal}
+
+Le même exemple mais avec une attribution dynamique des noms des attributs
+\begin{lstlisting}[language=Python]
+# declaration d une classe "vide"
+class Ma_classe():
+    pass
+
+# instanciation de la classe dans l objet inst
+inst = Ma_classe()
+# on passe par des variables pour les noms des attributs
+att1_name = "att1"
+att2_name = "att2"
+# on ajoute un attribut "att1" a la classe et lui affecte la valeur "coucou"
+setattr(inst, att1_name, "coucou")  # objet, nom, valeur
+# on ajoute un attribut "att2" a la classe et lui affecte la valeur 3
+setattr(inst, att2_name, 3)  # objet, nom, valeur
+# affichage des valeurs des attributs
+print(inst.att1, inst.att2)
+\end{lstlisting}
+\begin{terminal}
+coucou 3
+\end{terminal}
+
+Un autre exemple d'utilisation:
+\begin{lstlisting}[language=Python]
+# declaration d une classe "vide"
+class Ma_classe():
+    pass
+
+# instanciation de la classe dans l objet inst
+inst = Ma_classe()
+
+# defintion des attributs dans un dictionnaire
+mes_attributs = {"att1":"coucou", "att2":3}
+
+# ajout des attributs a la classe
+for key, value in mes_attributs.items():
+    setattr(inst, key, value)
+
+# affichage des valeurs des attributs
+print(inst.att1, inst.att2)
+\end{lstlisting}
+\begin{terminal}
+coucou 3
+\end{terminal}
+
+\begin{lstlisting}[language=Python]
+# declaration d une classe "vide"
+class Ma_classe():
+    pass
+
+# instanciation de la classe dans l objet inst
+inst = Ma_classe()
+
+# defintion des attributs dans un dictionnaire
+mes_attributs = {"att1":"coucou", "att2":3}
+
+# ajout des attributs a la classe
+for key, value in mes_attributs.items():
+    setattr(inst, key, value)
+
+# recuperation et affichage des attributs
+for key in mes_attributs.keys():
+    print(getattr(inst, key))
+\end{lstlisting}
+\begin{terminal}
+coucou
+3
+\end{terminal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Gestion de fichiers/ressources
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gestion de fichiers/ressources}
+
+% ---------------------------------------------------------------------
+\subsubsection{Context Manager}
+
+Dès qu'une ressource demande une ouverture puis une fermeture (e.g. des fichiers), il est possible d'utiliser un context manager pour ne pas avoir à gérer la fermeture.
+
+
+Par exemple, à la place de faire:
+
+\begin{lstlisting}[language=Python]
+f = open("tmp.txt", "r")
+file_contents = f.read()
+f.close()
+print(file_contents)
+\end{lstlisting}
+
+\begin{terminal}
+Contenu du fichier tmp.txt
+Sur plusieurs lignes...
+\end{terminal}
+
+Il est possible de faire (ce qui donne le même résultat qu'au dessus)
+\begin{lstlisting}[language=Python]
+with open("tmp.txt", "r") as f:
+    file_contents = f.read()
+print(file_contents)
+\end{lstlisting}
+
+Le context manager peut être utilisé dès qu'il faut ouvrir et fermer des ressources (pour un lock dans un thread par exemple, pour l'accès à des base de données...).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                     Lambda fonction
